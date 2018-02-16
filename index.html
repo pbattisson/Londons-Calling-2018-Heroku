@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="textid" ><br/>
+    <input type="button" value="Click me!" onclick="sendMessage()">
+</body>
+<script>
+    function sendMessage() {
+        var inputMsg = document.getElementById("textid").value;
+        console.log(inputMsg);
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/speak');
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(JSON.stringify({"message":inputMsg}));
+        xhr.onreadystatechange = function() {
+            console.log(this.status);
+        }
+    }
+</script>
+</html>
